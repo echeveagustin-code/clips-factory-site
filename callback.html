@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TikTok OAuth</title>
+</head>
+<body>
+
+<h2>Autorización recibida</h2>
+<p>Copiá el código de la URL y pegalo en tu script.</p>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code");
+
+if(code){
+  document.body.innerHTML += "<h3>CODE:</h3><pre>" + code + "</pre>";
+}
+</script>
+
+</body>
+</html>
