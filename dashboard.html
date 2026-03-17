@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clips Factory — Dashboard</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.07);
+      --text: #eef2ff;
+      --muted: #bac3ff;
+      --accent: #25f4ee;
+      --border: rgba(255,255,255,0.12);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #090d19 100%);
+    }
+    .wrap { width: min(1000px, calc(100% - 32px)); margin: 0 auto; padding: 36px 0 60px; }
+    .head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .head a { color: var(--muted); text-decoration: none; }
+    .grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.24);
+    }
+    h1, h2, h3 { margin-top: 0; }
+    p, li { color: var(--muted); line-height: 1.7; }
+    .pill {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37,244,238,.12);
+      color: var(--accent);
+      border: 1px solid rgba(37,244,238,.22);
+      margin-bottom: 14px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+    .ok {
+      color: #08121a;
+      background: var(--accent);
+      padding: 10px 14px;
+      border-radius: 14px;
+      display: inline-block;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    code {
+      display: block;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      overflow-wrap: anywhere;
+      color: var(--text);
+      margin-top: 14px;
+    }
+    ul { padding-left: 18px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <h1>Connected dashboard</h1>
+      <a href="index.html">← Back to homepage</a>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <div class="pill">TikTok account connection</div>
+        <div id="connectionBadge" class="ok">Checking connection...</div>
+        <p>
+          This dashboard demonstrates the next step after TikTok Login. Once the user authorizes the application, the service can continue with the content-posting workflow from the backend.
+        </p>
+        <h3>Integration flow</h3>
+        <ul>
+          <li>User starts from the website login entry point.</li>
+          <li>User authorizes the app via TikTok Login.</li>
+          <li>TikTok redirects back to the configured callback page.</li>
+          <li>The backend exchanges the authorization code for tokens.</li>
+          <li>The connected account can then continue with Content Posting API operations.</li>
+        </ul>
+      </section>
+
+      <aside class="card">
+        <h2>Authorization details</h2>
+        <p id="authText">No stored authorization code found yet.</p>
+        <code id="authCodeBox">Waiting for callback...</code>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const code = localStorage.getItem("tiktok_auth_code");
+    const state = localStorage.getItem("tiktok_auth_state");
+    const badge = document.getElementById("connectionBadge");
+    const authText = document.getElementById("authText");
+    const authCodeBox = document.getElementById("authCodeBox");
+
+    if (code) {
+      badge.textContent = "TikTok connected";
+      authText.textContent = "Authorization data was received on the callback page. The backend can now exchange the code for tokens and continue the posting flow.";
+      authCodeBox.textContent = `code=${code}\nstate=${state || ""}`;
+    } else {
+      badge.textContent = "Awaiting TikTok login";
+      authText.textContent = "A user needs to start the flow from the homepage and complete TikTok Login first.";
+      authCodeBox.textContent = "No authorization code stored in this browser session yet.";
+    }
+  </script>
+</body>
+</html>
