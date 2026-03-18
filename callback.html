@@ -5,62 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clips Factory — TikTok Callback</title>
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(180deg, #0b1020 0%, #090d19 100%);
-      color: #eef2ff;
-      font-family: Inter, system-ui, sans-serif;
-    }
-    .card {
-      width: min(680px, calc(100% - 32px));
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.3);
-    }
-    h1 { margin: 0 0 12px; font-size: 1.8rem; }
-    p, li { color: #bcc6ff; line-height: 1.7; }
-    code {
-      display: block;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      padding: 14px;
-      color: #eef2ff;
-      overflow-wrap: anywhere;
-      margin-top: 16px;
-    }
-    .ok { color: #25f4ee; }
-    .error { color: #ff7d97; }
-    .actions { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
-    a {
-      text-decoration: none;
-      color: #08121a;
-      background: #25f4ee;
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-weight: 700;
-    }
-    .ghost {
-      color: #eef2ff;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
+    :root{--bg:#0b1020;--card:rgba(255,255,255,.08);--text:#eef2ff;--muted:#b8c0ff;--accent:#25f4ee;--border:rgba(255,255,255,.12)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1020 0%,#090d19 100%);min-height:100vh;display:grid;place-items:center;padding:20px}
+    .card{width:min(680px,100%);background:var(--card);border:1px solid var(--border);border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+    h1{margin:0 0 12px}
+    p{margin:0 0 12px;color:var(--muted);line-height:1.7}
+    .row{margin-top:18px;padding:14px 16px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:16px;font-family:ui-monospace,Consolas,monospace;font-size:.94rem;word-break:break-word}
+    .ok{color:var(--accent)}
+    a{color:#fff}
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>TikTok authorization callback</h1>
-    <p id="status">Checking authorization response...</p>
-    <div id="details"></div>
-    <div class="actions">
-      <a href="dashboard.html">Open dashboard</a>
-      <a class="ghost" href="index.html">Back to homepage</a>
-    </div>
+    <h1>TikTok callback received</h1>
+    <p>This page captures the TikTok authorization response and continues the creator flow to the dashboard.</p>
+    <div class="row" id="statusBox">Reading callback parameters...</div>
+    <p id="nextText">Redirecting to dashboard in a moment.</p>
+    <p><a href="dashboard.html">Continue manually to dashboard</a></p>
   </div>
 
   <script>
@@ -68,34 +30,27 @@
     const code = params.get("code");
     const state = params.get("state");
     const error = params.get("error");
-    const errorDescription = params.get("error_description");
 
-    const status = document.getElementById("status");
-    const details = document.getElementById("details");
+    const statusBox = document.getElementById("statusBox");
+    const nextText = document.getElementById("nextText");
 
-    if (error) {
-      status.innerHTML = `<span class="error">Authorization failed.</span>`;
-      details.innerHTML = `
-        <p>TikTok returned an error for this authorization attempt.</p>
-        <code>error=${error}\nerror_description=${errorDescription || ""}</code>
-      `;
-    } else if (code) {
-      localStorage.setItem("tiktok_auth_code", code);
-      if (state) localStorage.setItem("tiktok_auth_state", state);
-      status.innerHTML = `<span class="ok">Authorization completed successfully.</span>`;
-      details.innerHTML = `
-        <p>The user has returned from TikTok Login and the authorization code has been captured for the next step of the integration flow.</p>
-        <code>code=${code}\nstate=${state || ""}</code>
-      `;
+    if (code) {
+      localStorage.setItem("cf_tiktok_code", code);
+      localStorage.setItem("cf_tiktok_state", state || "");
+      localStorage.setItem("cf_tiktok_connected", "true");
+      localStorage.setItem("cf_tiktok_connected_at", new Date().toISOString());
+      statusBox.innerHTML = '<span class="ok">Authorization code captured successfully.</span><br><br>code=' + code;
       setTimeout(() => {
         window.location.href = "dashboard.html";
       }, 1800);
+    } else if (error) {
+      statusBox.textContent = "TikTok returned an error: " + error;
+      nextText.textContent = "Review the app configuration and try again.";
     } else {
-      status.innerHTML = `<span class="error">No authorization code was found.</span>`;
-      details.innerHTML = `
-        <p>This page is configured as the TikTok callback URL, but no code parameter was present in the URL.</p>
-      `;
+      statusBox.textContent = "No code was found in the callback URL.";
+      nextText.textContent = "Try the TikTok login flow again from the homepage.";
     }
   </script>
 </body>
 </html>
+
