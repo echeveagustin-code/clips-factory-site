@@ -3,28 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms of Service — Clips Factory</title>
+  <title>Clips Factory — Terms of Service</title>
   <style>
-    body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#0b1020;color:#eef2ff;padding:32px}
-    .wrap{width:min(900px,100%);margin:0 auto}
-    h1,h2{margin-top:0}
-    p,li{line-height:1.7;color:#c7d0ff}
-    a{color:#25f4ee}
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.08);
+      --text: #eef2ff;
+      --muted: #b8c0ff;
+      --accent: #25f4ee;
+      --accent2: #fe2c55;
+      --border: rgba(255,255,255,0.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,244,238,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(254,44,85,.12), transparent 30%),
+        linear-gradient(180deg, #0b1020 0%, #090d19 100%);
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand {
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+    }
+    .brand-badge {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 24px rgba(37,244,238,.5);
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: .95rem;
+    }
+    main {
+      padding: 42px 0 56px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.04;
+      letter-spacing: -.03em;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 1.2rem;
+    }
+    p, li {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 18px;
+    }
+    footer {
+      padding: 0 0 56px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Terms of Service</h1>
-    <p>Clips Factory provides a creator-facing website flow for TikTok login and content posting integration review purposes.</p>
-    <h2>Use of service</h2>
-    <ul>
-      <li>Users may connect their TikTok account and proceed through the publishing workflow interface.</li>
-      <li>Users remain responsible for the content they upload and any actions they take on their connected TikTok account.</li>
-    </ul>
-    <h2>Availability</h2>
-    <p>The website and its integration flow may be updated or modified during the TikTok app review process.</p>
-    <p><a href="index.html">Back to home</a></p>
-  </div>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><span class="brand-badge"></span>Clips Factory</div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="publish.html">Publish Demo</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="card">
+      <h1>Terms of Service</h1>
+      <div class="meta">Last updated: March 2026</div>
+
+      <p>
+        These Terms of Service govern access to and use of <strong>Clips Factory</strong>,
+        including the Clips Factory website, connected dashboard, publish demo, authentication
+        flow, and related creator-facing tools and services.
+      </p>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>
+        By accessing or using <strong>Clips Factory</strong>, you agree to be bound by these
+        Terms of Service. If you do not agree, do not access or use Clips Factory.
+      </p>
+
+      <h2>2. Description of Service</h2>
+      <p>
+        <strong>Clips Factory</strong> provides a creator-facing workflow that may include account
+        connection, TikTok authentication, dashboard access, content posting workflow interfaces,
+        and related operational tools. Certain features may be in development, testing, sandbox,
+        demo, limited-access, or review stages.
+      </p>
+
+      <h2>3. Eligibility</h2>
+      <p>
+        You may use Clips Factory only if you are legally permitted to do so and are able to form
+        a binding agreement under applicable law. You are responsible for ensuring that your use of
+        Clips Factory complies with all laws, platform rules, and third-party requirements that
+        apply to you.
+      </p>
+
+      <h2>4. User Responsibilities</h2>
+      <p>When using Clips Factory, you agree that you will:</p>
+      <ul>
+        <li>provide accurate information when connecting or using your account;</li>
+        <li>use Clips Factory only for lawful and authorized purposes;</li>
+        <li>maintain the security of your own accounts, credentials, and connected services;</li>
+        <li>comply with TikTok’s applicable terms, policies, community rules, and developer requirements;</li>
+        <li>use only content that you own or are authorized to use and publish.</li>
+      </ul>
+
+      <h2>5. Prohibited Conduct</h2>
+      <p>You may not use Clips Factory to:</p>
+      <ul>
+        <li>violate law, regulations, or third-party rights;</li>
+        <li>infringe intellectual property or privacy rights;</li>
+        <li>upload, post, or process unlawful, harmful, fraudulent, or misleading content;</li>
+        <li>interfere with, disrupt, reverse engineer, abuse, or compromise the service;</li>
+        <li>attempt unauthorized access to Clips Factory systems, tokens, data, or accounts.</li>
+      </ul>
+
+      <h2>6. Third-Party Services</h2>
+      <p>
+        Clips Factory may interact with third-party services, including TikTok and related
+        infrastructure providers. Your use of those services may also be subject to the terms,
+        policies, and rules of those third parties. Clips Factory is not responsible for the
+        operation, availability, or decisions of third-party platforms.
+      </p>
+
+      <h2>7. Content and Rights</h2>
+      <p>
+        You retain responsibility for the content you upload, process, or publish through
+        <strong>Clips Factory</strong>. You represent that you have all necessary rights and
+        permissions for such content. Clips Factory does not claim ownership over your content,
+        except to the limited extent necessary to operate the service.
+      </p>
+
+      <h2>8. Availability and Changes</h2>
+      <p>
+        Clips Factory may modify, suspend, restrict, or discontinue any part of the service at any
+        time, with or without notice. Features may change as the service evolves, including beta,
+        sandbox, demo, and production workflows.
+      </p>
+
+      <h2>9. Termination</h2>
+      <p>
+        Clips Factory may suspend or terminate access to the service at any time if necessary to
+        protect the service, comply with law, address misuse, or enforce these Terms of Service.
+        You may stop using Clips Factory at any time.
+      </p>
+
+      <h2>10. Disclaimer</h2>
+      <p>
+        Clips Factory is provided on an “as is” and “as available” basis without warranties of any
+        kind, whether express or implied, to the fullest extent permitted by law. We do not warrant
+        that the service will be uninterrupted, secure, error-free, or suitable for every purpose.
+      </p>
+
+      <h2>11. Limitation of Liability</h2>
+      <p>
+        To the fullest extent permitted by law, Clips Factory and its operator shall not be liable
+        for indirect, incidental, special, consequential, exemplary, or punitive damages, or for
+        loss of data, loss of profits, loss of business, or service interruption arising out of or
+        related to your use of the service.
+      </p>
+
+      <h2>12. Indemnity</h2>
+      <p>
+        You agree to defend, indemnify, and hold harmless <strong>Clips Factory</strong> and its
+        operator from claims, liabilities, damages, losses, and expenses arising out of your use of
+        the service, your content, or your violation of these Terms or applicable law.
+      </p>
+
+      <h2>13. Governing Terms</h2>
+      <p>
+        These Terms of Service apply to your use of the <strong>Clips Factory</strong> website and
+        related workflow. Any legal interpretation or enforcement may be subject to applicable law
+        in the relevant jurisdiction.
+      </p>
+
+      <h2>14. Changes to These Terms</h2>
+      <p>
+        Clips Factory may update these Terms of Service from time to time. Updated versions will be
+        posted on this page with a revised date. Continued use of Clips Factory after changes take
+        effect may constitute acceptance of the updated Terms.
+      </p>
+
+      <h2>15. Contact</h2>
+      <p>
+        For questions regarding these Terms of Service or the <strong>Clips Factory</strong>
+        service, contact: <strong>echeveagustin.code@gmail.com</strong>
+      </p>
+
+      <p>
+        These Terms of Service specifically apply to the <strong>Clips Factory</strong> website,
+        dashboard, publish demo, authentication flow, and associated creator-facing workflow.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Clips Factory — Terms of Service
+    </div>
+  </footer>
 </body>
 </html>
 
